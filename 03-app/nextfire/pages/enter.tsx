@@ -1,4 +1,4 @@
-import { auth } from '../lib/firebase';
+import { auth, signIn } from '../lib/firebase';
 import { googleAuthProvider } from "../lib/firebase";
 
 export default function EnterPage(props) {
@@ -21,7 +21,7 @@ export default function EnterPage(props) {
 function SignInButton() {
     const signInWithGoogle = async () => {
         try {
-            await auth.signInWithPopup(googleAuthProvider);
+            await signIn()
         } catch (err) {
             console.log(err);
             throw err;
@@ -36,7 +36,7 @@ function SignInButton() {
 }
 
 function SignOutButton() {
-    return <button onClick={() => auth.singOut()}>
+    return <button onClick={() => auth.signOut()}>
         Sign Out
     </button>
 }
