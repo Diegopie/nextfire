@@ -1,7 +1,6 @@
-import { auth } from '../lib/firebase';
-import { googleAuthProvider } from "../lib/firebase";
+import { googleAuthProvider } from "../../lib/firebase";
 
-export default function EnterPage(props) {
+export default function Enter(props) {
 
     const user = null;
     const username = null;
@@ -42,5 +41,5 @@ function SignOutButton() {
 }
 
 function UsernameForm() {
-    return <div></div>
+
 }

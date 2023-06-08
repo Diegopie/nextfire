@@ -1,31 +1,23 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
-
+import { initializeApp, getApps} from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyB5Hr49Y7ewd6TJam27J0UjrPuDygV9Dio",
-  authDomain: "learn-firebase-36a6f.firebaseapp.com",
-  projectId: "learn-firebase-36a6f",
-  storageBucket: "learn-firebase-36a6f.appspot.com",
-  messagingSenderId: "126489367154",
-  appId: "1:126489367154:web:5c6ab4502b5c5644b128eb",
-  measurementId: "G-EPYBWX7ZJ7"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
-// Prevent Next from initializing the app more than once
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
+const firebase_app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
+export const auth = getAuth(firebase_app);
+export const firestore = getFirestore(firebase_app);
+export const storage = getStorage(firebase_app);
