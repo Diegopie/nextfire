@@ -15,14 +15,23 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
+// Prevent Secondary Init
 const firebase_app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
+// Auth
 export const auth = getAuth(firebase_app);
 export const googleAuthProvider = new GoogleAuthProvider();
 googleAuthProvider.setCustomParameters({
   prompt: "select_account"
 });
-export const signIn = () => {signInWithRedirect(auth, googleAuthProvider)};
+export const signIn = () => {
+  signInWithRedirect(auth, googleAuthProvider)
+  .then(response => {
+    console.log(response);
+    return response
+  })
+};
 
-export const firestore = getFirestore(firebase_app);
+export const db = getFirestore(firebase_app);
+
 export const storage = getStorage(firebase_app);
